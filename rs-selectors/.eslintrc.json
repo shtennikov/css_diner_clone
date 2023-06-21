@@ -15,6 +15,7 @@
     "rules": {
         "no-console": "off",
         "import/prefer-default-export": "off",
+        "import/no-extraneous-dependencies": "off",
         "max-lines-per-function": ["error", 40],
         "class-methods-use-this": 0,
         "@typescript-eslint/no-explicit-any": "error",
