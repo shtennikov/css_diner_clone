@@ -1,0 +1,97 @@
+@keyframes move {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(0.93);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.desk {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 10px;
+    margin: auto;
+    margin-top: 5vh;
+    width: fit-content;
+    height: 0;
+    box-shadow: 0px 10px 0px 0px #af6c00;
+    border-bottom: 120px solid #ff9f00;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    & > * {
+        margin-top: 110px;
+    }
+}
+
+plate {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    align-items: center;
+    width: 100px;
+    height: 85px;
+    border-radius: 50%;
+    background-color: wheat;
+    box-shadow: 0px 5px 0px 0px rgb(212, 192, 155);
+}
+
+apple {
+    position: absolute;
+    margin-bottom: 5px;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: #e41919;
+    box-shadow: 0px 5px 0px rgba(0, 0, 0, 0.2);
+    border-style: solid;
+    border-width: 2px 4px 15px 4px;
+    border-color: #ab1212;
+    position: relative;
+    // TODO Отдельный клас с анимацией
+    // animation: move 0.7s infinite;
+    &.small {
+        width: 35px;
+        height: 35px;
+        border-width: 2px 2px 6px 2px;
+    }
+    &::before {
+        content: '';
+        display: block;
+        position: absolute;
+        background: rgba(255, 255, 255, 0.3);
+        height: 30%;
+        width: 30%;
+        top: 0px;
+        left: calc(50% - 15%);
+        border-radius: 100px;
+    }
+    &:last-child {
+        position: absolute;
+        z-index: 500;
+        &.small {
+            top: calc(50% - 25px);
+        }
+    }
+    &:nth-last-child(2) {
+        z-index: 600;
+        &.small {
+            top: calc(50% - 60px);
+        }
+    }
+}
+
+square {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    width: 60%;
+    height: 60%;
+    background-color: rgb(0, 16, 235);
+    box-shadow: 0px 5px 0px rgba(0, 0, 0, 0.2);
+}
