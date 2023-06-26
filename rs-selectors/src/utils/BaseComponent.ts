@@ -4,12 +4,12 @@
 export default class BaseComponent {
     #node: HTMLElement;
 
-    constructor(tagName: string = 'div', classNames: string[] = [], parentComponent?: BaseComponent) {
+    private observer: BaseComponent | null = null;
+
+    constructor(tagName: string, classNames: string[] | null = null, parentComponent?: BaseComponent) {
         this.#node = document.createElement(tagName);
-        this.#node.classList.add(...classNames);
-        if (parentComponent) {
-            parentComponent.getNode().append(this.#node)
-        }
+        if (classNames) this.#node.classList.add(...classNames);
+        if (parentComponent) parentComponent.getNode().append(this.#node);
     }
 
     public append(child: BaseComponent): void {
@@ -25,7 +25,11 @@ export default class BaseComponent {
     public setAttributes(attributes: Record<string, string>): void {
         Object.entries(attributes).forEach(([key, value]) => {
             this.#node.setAttribute(key, value);
-        })
+        });
+    }
+
+    public insertHTML(html: string): void {
+        this.#node.insertAdjacentHTML('beforeend', html);
     }
 
     public setTextContent(text: string): void {
@@ -38,6 +42,18 @@ export default class BaseComponent {
 
     public addClass(className: string): void {
         this.#node.classList.add(className);
+    }
+
+    public removeClass(className: string): void {
+        this.#node.classList.remove(className);
+    }
+
+    public setObserver(observer: BaseComponent): void {
+        this.observer = observer;
+    }
+
+    public getObserver(): BaseComponent | null {
+        return this.observer;
     }
 
     public destroy(): void {
