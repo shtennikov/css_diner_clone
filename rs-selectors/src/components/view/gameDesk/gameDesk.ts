@@ -1,5 +1,5 @@
 import './gameDesk.scss';
-import { AppView } from '../appView';
+import { View } from '../View';
 import { ClassesCSS } from '../../../types';
 import BaseComponent from '../../../utils/BaseComponent';
 
@@ -8,7 +8,7 @@ const CSSClasses: ClassesCSS = {
     desk: ['desk'],
 };
 
-export class GameDesk extends AppView {
+export class GameDesk extends View {
     private deskContainer = new BaseComponent('div', CSSClasses.deskContainer);
 
     private desk = new BaseComponent('div', CSSClasses.desk, this.deskContainer);

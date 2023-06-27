@@ -1,6 +1,6 @@
 import { Attributes, ClassesCSS } from '../../../types';
 import BaseComponent from '../../../utils/BaseComponent';
-import { AppView } from '../appView';
+import { View } from '../View';
 
 const YEAR_FOUNDATION = '2023';
 const GITHUB_LINK_TEXT = 'GitHub';
@@ -43,7 +43,7 @@ const footerAttributes: Attributes = {
     },
 };
 
-export class Footer extends AppView {
+export class Footer extends View {
     private footer = new BaseComponent('footer', CSSClasses.footer);
 
     private footerContainer = new BaseComponent('div', CSSClasses.footerContainer, this.footer);

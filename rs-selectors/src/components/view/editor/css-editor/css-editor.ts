@@ -1,6 +1,6 @@
 import { Attributes, ClassesCSS } from '../../../../types';
 import BaseComponent from '../../../../utils/BaseComponent';
-import { AppView } from '../../appView';
+import { View } from '../../View';
 
 const ROWS_COUNT = 10;
 const INPUT_PLACEHODLER = 'Type a CSS selector';
@@ -27,7 +27,7 @@ const cssEditorAttributes: Attributes = {
     },
 };
 
-export class CssEditor extends AppView {
+export class CssEditor extends View {
     private cssEditor = new BaseComponent('div', CSSClasses.cssEditor);
 
     private editorRows = new BaseComponent('div', CSSClasses.editorRows, this.cssEditor);

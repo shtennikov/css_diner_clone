@@ -1,6 +1,6 @@
 import { Attributes, ClassesCSS } from '../../../types';
 import BaseComponent from '../../../utils/BaseComponent';
-import { AppView } from '../appView';
+import { View } from '../View';
 
 const LOGO_TEXT = 'CSS Selectors';
 
@@ -26,7 +26,7 @@ const headerAttributes: Attributes = {
     },
 };
 
-export class Header extends AppView {
+export class Header extends View {
     private header = new BaseComponent('header', CSSClasses.header);
 
     private navBar = new BaseComponent('nav', CSSClasses.navBar, this.header);

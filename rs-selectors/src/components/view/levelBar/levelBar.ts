@@ -1,7 +1,7 @@
 import { Attributes, ClassesCSS, LevelData } from '../../../types';
 import BaseComponent from '../../../utils/BaseComponent';
-import { AppView } from '../appView';
-import levelData from '../../../data/levels.json';
+import { View } from '../View';
+import { levelData } from '../../../data/LevelData';
 
 const CSSClasses: ClassesCSS = {
     levelBar: ['offcanvas', 'offcanvas-end'],
@@ -32,7 +32,7 @@ const sideBarAttributes: Attributes = {
     },
 };
 
-export class LevelBar extends AppView {
+export class LevelBar extends View {
     private levelBar = new BaseComponent('div', CSSClasses.levelBar);
 
     private barHeader = new BaseComponent('div', CSSClasses.barHeader, this.levelBar);

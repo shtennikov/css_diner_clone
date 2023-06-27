@@ -1,6 +1,6 @@
 import { ClassesCSS } from '../../../../types';
 import BaseComponent from '../../../../utils/BaseComponent';
-import { AppView } from '../../appView';
+import { View } from '../../View';
 
 const ROWS_COUNT = 10;
 
@@ -10,7 +10,7 @@ const CSSClasses: ClassesCSS = {
     preformattedBlock: ['pre-block'],
 };
 
-export class HtmlEditor extends AppView {
+export class HtmlEditor extends View {
     private htmlEditor = new BaseComponent('div', CSSClasses.htmlEditor);
 
     private editorRows = new BaseComponent('div', CSSClasses.editorRows, this.htmlEditor);
