@@ -34,11 +34,15 @@ export class AnswerHandler implements ISubject {
     }
 
     private handleAnswer(): void {
-        if (!this.input.value) return;
-        const isCorrectAnswer = this.checkIfAnswerIsCorrect(this.input.value);
+        const isCorrectAnswer = Boolean(this.input.value) && this.checkIfAnswerIsCorrect(this.input.value);
 
-        if (isCorrectAnswer) this.notify();
-        else this.handleIncorrectAnswer();
+        if (!isCorrectAnswer) {
+            this.handleIncorrectAnswer();
+            return;
+        }
+
+        this.input.value = '';
+        this.notify();
     }
 
     private handleIncorrectAnswer(): void {
