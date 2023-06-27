@@ -7,8 +7,7 @@ const ROWS_COUNT = 10;
 const CSSClasses: ClassesCSS = {
     htmlEditor: ['html-editor'],
     editorRows: ['editor__rows'],
-    preformattedBlock: ['code-block'],
-    codeBlock: ['language-html'],
+    preformattedBlock: ['pre-block'],
 };
 
 export class HtmlEditor extends AppView {
@@ -18,8 +17,6 @@ export class HtmlEditor extends AppView {
 
     private preformattedBlock = new BaseComponent('pre', CSSClasses.preformattedBlock, this.htmlEditor);
 
-    private codeBlock = new BaseComponent('code', CSSClasses.codeBlock, this.preformattedBlock);
-
     constructor() {
         super();
         this.fillRowsWithNumbers();
@@ -27,7 +24,6 @@ export class HtmlEditor extends AppView {
             htmlEditor: this.htmlEditor,
             editorRows: this.editorRows,
             preformattedBlock: this.preformattedBlock,
-            codeBlock: this.codeBlock,
         });
     }
 
