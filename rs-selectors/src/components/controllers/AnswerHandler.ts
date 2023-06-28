@@ -14,7 +14,7 @@ export class AnswerHandler implements ISubject {
     private observers: IObserver[] = [];
 
     public start(): void {
-        this.input.addEventListener('keyup', this.listenInputEvent.bind(this));
+        document.addEventListener('keyup', this.listenInputEvent.bind(this));
         this.submitBtn.addEventListener('click', this.listenButtonEvent.bind(this));
     }
 
