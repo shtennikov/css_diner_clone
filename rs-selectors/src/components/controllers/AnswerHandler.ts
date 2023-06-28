@@ -1,5 +1,6 @@
 import { AppComponents } from '../../data/AppComponents';
 import { IObserver, ISubject } from '../../types';
+import { isSelectorValid } from '../../utils/isSelectorValid';
 
 const SHAKING_CLASS_CSS = 'shaking';
 const INCORRECT_ANSWER_CLASS_CSS = 'incorrect';
@@ -56,6 +57,8 @@ export class AnswerHandler implements ISubject {
     }
 
     private checkIfAnswerIsCorrect(inputValue: string): boolean {
+        if (!isSelectorValid(this.input.value)) return false;
+
         const foundItems = this.desk.querySelectorAll(inputValue);
         const isFoundItemsAnimated = [...foundItems].every((item) => item.classList.contains('animated'));
 
