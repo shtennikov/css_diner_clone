@@ -26,11 +26,10 @@ export class LevelController implements IObserver {
 
     private totalLevels: number = this.levelData.length - 1;
 
-    private currentLevelNodeInSidebar: Element;
+    private currentLevelNodeInSidebar = this.levelListInSideBarNode.children[this.currentLevel];
 
     constructor() {
         this.listenLevelSwitching();
-        this.currentLevelNodeInSidebar = this.levelListInSideBarNode.children[this.currentLevel];
     }
 
     public update(): void {
@@ -61,6 +60,16 @@ export class LevelController implements IObserver {
         this.replaceCurrentTableContent();
     }
 
+    private startSelectedLevel(event: MouseEvent): void {
+        const targetNode = event.target;
+        if (targetNode instanceof HTMLElement) {
+            const selectedLevel = Number(targetNode.dataset.level) - 1;
+            this.currentLevel = selectedLevel;
+            this.highlightCurrentLevelInSideBar(this.currentLevel);
+            this.replaceCurrentTableContent();
+        }
+    }
+
     private replaceCurrentTableContent(): void {
         this.desk.classList.add(CHANGING_CLASS_CSS);
         this.desk.addEventListener('transitionend', () => {
@@ -79,12 +88,13 @@ export class LevelController implements IObserver {
         this.currentLevelNodeInSidebar.classList.remove(...SIDE_BAR_CURRENT_CLASSES_CSS);
         const newCurrentLevelNode = this.levelListInSideBarNode.children[newCurrentLevel];
 
-        newCurrentLevelNode.classList.add(...SIDE_BAR_CURRENT_CLASSES_CSS)
+        newCurrentLevelNode.classList.add(...SIDE_BAR_CURRENT_CLASSES_CSS);
         this.currentLevelNodeInSidebar = newCurrentLevelNode;
     }
 
     private listenLevelSwitching(): void {
         this.lvlNextBtn.addEventListener('click', this.startNextLevel.bind(this));
         this.lvlPrevBtn.addEventListener('click', this.startPreviousLevel.bind(this));
+        this.levelListInSideBarNode.addEventListener('click', this.startSelectedLevel.bind(this));
     }
 }
