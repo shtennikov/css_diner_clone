@@ -1,0 +1,23 @@
+.navbar-ritght-side {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.level_selection {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.level_current {
+    margin-right: 10px;
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    color: #ffc107;
+}
+
+.badge {
+    width: 85px;
+    height: 30px;
+    font-size: 16px;
+}
