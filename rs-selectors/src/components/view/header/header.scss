@@ -1,3 +1,9 @@
+.header .container {
+    @media (max-width: 768px) {
+        flex-direction: column;
+    }
+}
+
 .navbar-ritght-side {
     display: flex;
     align-items: center;
@@ -8,16 +14,15 @@
     display: flex;
     align-items: center;
     gap: 5px;
+    & .badge {
+        width: 85px;
+        height: 30px;
+        font-size: 16px;
+    }
 }
 
 .level_current {
     margin-right: 10px;
     font-family: 'JetBrains Mono', 'Courier New', monospace;
     color: #ffc107;
-}
-
-.badge {
-    width: 85px;
-    height: 30px;
-    font-size: 16px;
 }

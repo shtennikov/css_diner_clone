@@ -4,6 +4,7 @@ import BaseComponent from '../../../utils/BaseComponent';
 import { View } from '../View';
 
 const LOGO_TEXT = 'CSS Selectors';
+const HELP_BTN_TEXT = 'Help';
 const PREV_BTN_TEXT = 'Prev';
 const NEXT_BTN_TEXT = 'Next';
 const BADGE_DEFAULT_TEXT = 'Level: 1';
@@ -53,6 +54,8 @@ export class Header extends View {
 
     private lvlBadge = new BaseComponent('span', CSSClasses.lvlBadge, this.lvlSelectionContainer);
 
+    private helpBtn = new BaseComponent('span', CSSClasses.lvlBtn, this.lvlSelectionContainer);
+
     private lvlPrevBtn = new BaseComponent('span', CSSClasses.lvlBtn, this.lvlSelectionContainer);
 
     private lvlNextBtn = new BaseComponent('span', CSSClasses.lvlBtn, this.lvlSelectionContainer);
@@ -64,6 +67,7 @@ export class Header extends View {
     constructor() {
         super();
         this.navBarLogo.setTextContent(LOGO_TEXT);
+        this.helpBtn.setTextContent(HELP_BTN_TEXT);
         this.lvlPrevBtn.setTextContent(PREV_BTN_TEXT);
         this.lvlNextBtn.setTextContent(NEXT_BTN_TEXT);
         this.lvlBadge.setTextContent(BADGE_DEFAULT_TEXT);
@@ -81,6 +85,7 @@ export class Header extends View {
             navBarRightSide: this.navBarRightSide,
             lvlSelectionContainer: this.lvlSelectionContainer,
             lvlBadge: this.lvlBadge,
+            helpBtn: this.helpBtn,
             lvlPrevBtn: this.lvlPrevBtn,
             lvlNextBtn: this.lvlNextBtn,
         });

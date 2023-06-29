@@ -1,9 +1,12 @@
+import { STORAGE_LEVEL_KEY } from '../../constants';
 import { AppComponents } from '../../data/AppComponents';
+import { levelData } from '../../data/LevelData';
 import { IObserver, ISubject } from '../../types';
 import { isSelectorValid } from '../../utils/isSelectorValid';
 
 const SHAKING_CLASS_CSS = 'shaking';
 const INCORRECT_ANSWER_CLASS_CSS = 'incorrect';
+const DELAY_INTERVAL = 150;
 
 export class AnswerHandler implements ISubject {
     private input = AppComponents.cssEditorComponent.answerInput.getNode() as HTMLInputElement;
@@ -12,11 +15,14 @@ export class AnswerHandler implements ISubject {
 
     private desk = AppComponents.deskComponent.desk.getNode();
 
+    private helpBtn = AppComponents.headerComponent.helpBtn.getNode();
+
     private observers: IObserver[] = [];
 
     public start(): void {
         document.addEventListener('keyup', this.listenInputEvent.bind(this));
         this.submitBtn.addEventListener('click', this.listenButtonEvent.bind(this));
+        this.helpBtn.addEventListener('click', this.listenHelpButtonEvent.bind(this));
     }
 
     public subscribe(observer: IObserver): void {
@@ -65,6 +71,20 @@ export class AnswerHandler implements ISubject {
         return Boolean(foundItems.length && isFoundItemsAnimated);
     }
 
+    private showCorrectAnswer(): void {
+        const currentLevel = Number(localStorage.getItem(STORAGE_LEVEL_KEY));
+        const { correctAnswer } = levelData[currentLevel];
+        let delay = DELAY_INTERVAL;
+        this.input.value = '';
+
+        [...correctAnswer].forEach((letter) => {
+            setTimeout(() => {
+                this.input.value += letter;
+            }, delay);
+            delay += DELAY_INTERVAL;
+        });
+    }
+
     private listenInputEvent(event: KeyboardEvent): void {
         if (event.key === 'Enter') {
             this.handleAnswer();
@@ -73,5 +93,9 @@ export class AnswerHandler implements ISubject {
 
     private listenButtonEvent(): void {
         this.handleAnswer();
+    }
+
+    private listenHelpButtonEvent(): void {
+        this.showCorrectAnswer();
     }
 }
