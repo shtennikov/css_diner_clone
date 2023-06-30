@@ -1,12 +1,12 @@
+import { STORAGE_LEVEL_KEY } from '../../constants';
 import { AppComponents } from '../../data/AppComponents';
 import { levelData } from '../../data/LevelData';
-import { ILevelData, IObserver } from '../../types';
+import { ILevelData, IObserver, ISubject } from '../../types';
 
-const STORAGE_LEVEL_KEY = 'level';
 const CHANGING_CLASS_CSS = 'changing';
 const SIDE_BAR_CURRENT_CLASSES_CSS = ['current', 'bg-warning'];
 
-export class LevelController implements IObserver {
+export class LevelController implements IObserver, ISubject {
     // counting starts from 0
     private currentLevel: number = Number(localStorage.getItem(STORAGE_LEVEL_KEY)); // if not, then Number(null) === 0
 
@@ -28,11 +28,14 @@ export class LevelController implements IObserver {
 
     private currentLevelNodeInSidebar = this.levelListInSideBarNode.children[this.currentLevel];
 
+    private observers: IObserver[] = [];
+
     constructor() {
         this.listenLevelSwitching();
     }
 
     public update(): void {
+        this.notify(this.currentLevel);
         this.startNextLevel();
     }
 
@@ -44,6 +47,21 @@ export class LevelController implements IObserver {
         this.saveCurrentLevel();
         this.highlightCurrentLevelInSideBar(this.currentLevel);
         this.levelBadge.textContent = `Level: ${this.currentLevel + 1}`;
+    }
+
+    public subscribe(observer: IObserver): void {
+        this.observers.push(observer);
+    }
+
+    public unsubscribe(observer: IObserver): void {
+        const observerIndex = this.observers.indexOf(observer);
+        if (observerIndex !== -1) {
+            this.observers.splice(observerIndex, 1);
+        }
+    }
+
+    public notify(passedLevel: number): void {
+        this.observers.forEach((observer) => observer.update(passedLevel));
     }
 
     private startNextLevel(): void {

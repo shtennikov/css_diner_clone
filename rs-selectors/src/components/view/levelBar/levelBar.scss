@@ -1,0 +1,8 @@
+.list-group-item {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    &.current.bg-warning {
+        color: #000000;
+    }
+}
