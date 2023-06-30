@@ -19,6 +19,8 @@ export class ProgressController implements IObserver {
 
     private levelListInSideBarNode = AppComponents.levelBarComponent.levelList.getNode();
 
+    private resetBtn = AppComponents.levelBarComponent.resetProgressBtn.getNode();
+
     private notSolvedBadge: BaseComponent = AppComponents.levelBarComponent.notSolvedBadge;
 
     private solvedBadge: BaseComponent = AppComponents.levelBarComponent.solvedBadge;
@@ -43,10 +45,11 @@ export class ProgressController implements IObserver {
 
     public start(): void {
         this.helpBtn.addEventListener('click', this.listenHelpButtonEvent.bind(this));
+        this.resetBtn.addEventListener('click', this.resetProgress.bind(this));
     }
 
-    private drawNewBadge(passedLevel: number, newBadge: BaseComponent): void {
-        const passedLevelSideBarNode = this.levelListInSideBarNode.children[passedLevel];
+    private drawNewBadge(levelNumber: number, newBadge: BaseComponent): void {
+        const passedLevelSideBarNode = this.levelListInSideBarNode.children[levelNumber];
         const badge = passedLevelSideBarNode.lastElementChild;
         if (badge && badge.classList.contains(CSSClasses.badge[0])) {
             badge.remove();
@@ -63,6 +66,16 @@ export class ProgressController implements IObserver {
 
     private saveProgressData(): void {
         localStorage.setItem(STORAGE_PROGRESS_KEY, JSON.stringify(this.progressData));
+    }
+
+    private resetProgress(): void {
+        this.levelData.forEach((level, index) => {
+            // eslint-disable-next-line no-param-reassign
+            level.levelStatus = LevelStatus.NotSolved;
+            this.progressData[index] = LevelStatus.NotSolved;
+            this.drawNewBadge(index, this.notSolvedBadge);
+        });
+        this.saveProgressData();
     }
 
     private updateSolvedLevelData(passedLevel: number): void {

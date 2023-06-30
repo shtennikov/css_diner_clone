@@ -22,6 +22,8 @@ export class LevelController implements IObserver, ISubject {
 
     private levelListInSideBarNode = AppComponents.levelBarComponent.levelList.getNode();
 
+    private resetBtn = AppComponents.levelBarComponent.resetProgressBtn.getNode();
+
     private levelData: ILevelData[] = levelData;
 
     private totalLevels: number = this.levelData.length - 1;
@@ -88,6 +90,11 @@ export class LevelController implements IObserver, ISubject {
         }
     }
 
+    private resetLevel(): void {
+        this.currentLevel = 0;
+        this.replaceCurrentTableContent();
+    }
+
     private replaceCurrentTableContent(): void {
         this.desk.classList.add(CHANGING_CLASS_CSS);
         this.desk.addEventListener('transitionend', () => {
@@ -114,5 +121,6 @@ export class LevelController implements IObserver, ISubject {
         this.lvlNextBtn.addEventListener('click', this.startNextLevel.bind(this));
         this.lvlPrevBtn.addEventListener('click', this.startPreviousLevel.bind(this));
         this.levelListInSideBarNode.addEventListener('click', this.startSelectedLevel.bind(this));
+        this.resetBtn.addEventListener('click', this.resetLevel.bind(this));
     }
 }

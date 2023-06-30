@@ -7,6 +7,7 @@ import { levelData } from '../../../data/LevelData';
 const SOLVED_BADGE_TEXT = 'solved';
 const NOT_SOLVED_BADGE_TEXT = 'not solved';
 const SOLVED_WITH_HINT_BADGE_TEXT = 'solved with hint';
+const RESET_BUTTON_TEXT = 'Reset progress';
 
 const CSSClasses: ClassesCSS = {
     levelBar: ['offcanvas', 'offcanvas-end'],
@@ -20,6 +21,7 @@ const CSSClasses: ClassesCSS = {
     notSolvedBadge: ['badge-secondary', 'text-bg-secondary'],
     solvedBadge: ['badge-success', 'text-bg-success'],
     solvedWithHintBadge: ['badge-primary', 'text-bg-primary'],
+    resetBtn: ['btn', 'btn-outline-danger'],
 };
 
 const sideBarAttributes: Attributes = {
@@ -39,6 +41,9 @@ const sideBarAttributes: Attributes = {
     level: {
         'aria-current': 'true',
     },
+    resetBtn: {
+        type: 'button',
+    },
 };
 
 export class LevelBar extends View {
@@ -52,6 +57,8 @@ export class LevelBar extends View {
 
     private barCloseButton = new BaseComponent('button', CSSClasses.barCloseButton, this.barHeader);
 
+    private resetProgressBtn = new BaseComponent('button', CSSClasses.resetBtn, this.barBody);
+
     private levelList = new BaseComponent('div', CSSClasses.levelList, this.barBody);
 
     private notSolvedBadge = new BaseComponent('span', CSSClasses.badge);
@@ -62,12 +69,15 @@ export class LevelBar extends View {
 
     constructor() {
         super();
+        this.resetProgressBtn.setAttributes(sideBarAttributes.resetBtn);
+        this.resetProgressBtn.setTextContent(RESET_BUTTON_TEXT);
         this.levelBar.setAttributes(sideBarAttributes.levelSideBar);
         this.barTitle.setAttributes(sideBarAttributes.barTitle);
         this.barCloseButton.setAttributes(sideBarAttributes.barCloseButton);
         this.createBadges();
         this.fillLevelList(levelData);
         this.rememberElements('levelBarComponent', {
+            resetProgressBtn: this.resetProgressBtn,
             levelBar: this.levelBar,
             barHeader: this.barHeader,
             barBody: this.barBody,
