@@ -3,7 +3,7 @@ import BaseComponent from '../../../../utils/BaseComponent';
 import { View } from '../../View';
 
 const ROWS_COUNT = 10;
-const INPUT_PLACEHODLER = 'Type a CSS selector';
+const INPUT_PLACEHODLER = 'Type a selector';
 const BUTTON_TEXT = 'Enter';
 
 const CSSClasses: ClassesCSS = {
