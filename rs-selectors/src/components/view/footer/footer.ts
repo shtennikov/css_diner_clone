@@ -1,3 +1,4 @@
+import './footer.scss';
 import { Attributes, ClassesCSS } from '../../../types';
 import BaseComponent from '../../../utils/BaseComponent';
 import { View } from '../View';
