@@ -40,12 +40,21 @@ export default class BaseComponent {
         return this.#node;
     }
 
-    public addClass(className: string): void {
-        this.#node.classList.add(className);
+    public getCloneNode(): Node {
+        return this.#node.cloneNode(true);
+    }
+
+    public addClass(className: string | string[]): void {
+        if (typeof className === 'string') this.#node.classList.add(className);
+        else this.#node.classList.add(...className);
     }
 
     public removeClass(className: string): void {
         this.#node.classList.remove(className);
+    }
+
+    public addId(id: string): void {
+        this.#node.id = id;
     }
 
     public setObserver(observer: BaseComponent): void {
