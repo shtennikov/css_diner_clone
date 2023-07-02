@@ -10,50 +10,117 @@
     }
 }
 
+@keyframes shake {
+    0% {
+        transform: translateX(0px);
+    }
+    25% {
+        transform: translateX(-5px);
+    }
+
+    50% {
+        transform: translateX(0px);
+    }
+
+    75% {
+        transform: translateX(5px);
+    }
+
+    100% {
+        transform: translateX(0px);
+    }
+}
+
 .desk {
     display: flex;
     justify-content: space-around;
     align-items: center;
     gap: 10px;
+    position: relative;
     margin: auto;
     margin-top: 5vh;
     width: fit-content;
+    max-width: 100%;
     height: 0;
     box-shadow: 0px 10px 0px 0px #af6c00;
     border-bottom: 120px solid #ff9f00;
     border-left: 50px solid transparent;
     border-right: 50px solid transparent;
+    transition: all 0.3s ease-in-out;
     & > * {
         margin-top: 110px;
     }
+    &.changing > * {
+        animation: none;
+        transition: all 0.4s ease-in-out;
+        transform: translateX(-3000px);
+    }
+    &.shaking {
+        animation: shake 0.1s 4;
+    }
+    & .message {
+        padding-top: 25px;
+        max-width: 80%;
+        font-size: 16px;
+        font-family: 'JetBrains Mono', 'Courier New', monospace;
+        font-weight: 700;
+        text-align: center;
+        text-shadow: 0px 2px 0px rgba(0, 0, 0, 0.15);
+        color: #ffffff;
+        animation: move 0.7s;
+    }
 }
 
-plate {
+plate,
+placemat {
     display: flex;
     justify-content: center;
     position: relative;
+    z-index: 5;
     align-items: center;
     width: 100px;
     height: 85px;
     border-radius: 50%;
-    background-color: wheat;
+    background-color: rgb(228, 217, 197);
     box-shadow: 0px 5px 0px 0px rgb(212, 192, 155);
+    &#rim:before {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 8%;
+        top: 8%;
+        height: 85%;
+        width: 85%;
+        border-radius: 50%;
+        border: solid 10px #948cdd;
+    }
 }
 
-apple {
-    position: absolute;
+placemat {
+    position: relative;
+    box-sizing: border-box;
+    border-radius: 0;
+    background-color: #880000;
+    box-shadow: none;
+    border: solid 3px #5a0a01;
+}
+
+plate placemat {
+    width: 80%;
+    height: 80%;
+}
+
+apple,
+orange {
+    position: relative;
+    z-index: 5;
     margin-bottom: 5px;
     width: 70px;
     height: 70px;
     border-radius: 50%;
-    background-color: #e41919;
-    box-shadow: 0px 5px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 3px 0px rgba(0, 0, 0, 0.2);
     border-style: solid;
     border-width: 2px 4px 15px 4px;
-    border-color: #ab1212;
-    position: relative;
-    // TODO Отдельный клас с анимацией
-    // animation: move 0.7s infinite;
     &.small {
         width: 35px;
         height: 35px;
@@ -70,7 +137,23 @@ apple {
         left: calc(50% - 15%);
         border-radius: 100px;
     }
-    &:last-child {
+}
+
+apple {
+    background-color: #e41919;
+    border-color: #ab1212;
+}
+
+orange {
+    background-color: #f57600;
+    border-color: #cf6400;
+}
+
+plate apple,
+plate orange,
+placemat apple,
+placemat orange {
+    &:nth-last-child(1) {
         position: absolute;
         z-index: 500;
         &.small {
@@ -85,13 +168,17 @@ apple {
     }
 }
 
-square {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 10px;
-    width: 60%;
-    height: 60%;
-    background-color: rgb(0, 16, 235);
-    box-shadow: 0px 5px 0px rgba(0, 0, 0, 0.2);
+.animated {
+    animation: move 0.7s infinite;
+}
+
+.mouseover {
+    &_desk {
+        outline: 2px dashed #fff;
+    }
+    &_markup {
+        & * {
+            color: #fff;
+        }
+    }
 }

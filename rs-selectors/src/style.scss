@@ -1,0 +1,17 @@
+@font-face {
+    font-family: 'JetBrains Mono';
+    src: url('./assets/fonts/JetBrainsMono-Regular.woff2') format('woff2'),
+        url('./assets/fonts/JetBrainsMono-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+.body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    & > * {
+        flex: 0 1 auto;
+    }
+}
