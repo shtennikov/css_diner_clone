@@ -1,16 +1,12 @@
-import { STORAGE_LEVEL_KEY, STORAGE_PROGRESS_KEY } from '../../constants';
+import { STORAGE_LEVEL_KEY, STORAGE_PASSED_LEVELS_KEY, STORAGE_PROGRESS_KEY } from '../../constants';
 import { AppComponents } from '../../data/AppComponents';
 import { levelData } from '../../data/LevelData';
-import { ClassesCSS, ILevelData, IObserver, LevelStatus, ProgressData } from '../../types';
+import { ILevelData, LevelStatus, ProgressData } from '../../types';
 import BaseComponent from '../../utils/BaseComponent';
 
-const CSSClasses: ClassesCSS = {
-    badge: ['badge'],
-    notSolvedBadge: ['badge-secondary', 'text-bg-secondary'],
-    solvedWithHintBadge: ['badge-primary', 'text-bg-primary'],
-};
+const BADGE_CLASS_CSS = 'badge';
 
-export class ProgressController implements IObserver {
+export class ProgressController {
     private progressData: ProgressData;
 
     private levelData: ILevelData[] = levelData;
@@ -27,31 +23,45 @@ export class ProgressController implements IObserver {
 
     private solvedWithHintBadge: BaseComponent = AppComponents.levelBarComponent.solvedWithHintBadge;
 
+    private passedLevels: number = Number(localStorage.getItem(STORAGE_PASSED_LEVELS_KEY));
+
     constructor() {
         const progressDataInStorage = localStorage.getItem(STORAGE_PROGRESS_KEY);
         this.progressData = progressDataInStorage ? JSON.parse(progressDataInStorage) : {};
         if (!progressDataInStorage) this.setUpStartingData();
     }
 
-    public update(passedLevel: number): void {
-        if (this.progressData[passedLevel] === LevelStatus.Solved) return;
-        if (this.progressData[passedLevel] === LevelStatus.NotSolved) {
-            this.updateSolvedLevelData(passedLevel);
-            this.drawNewBadge(passedLevel, this.solvedBadge);
-            return;
-        }
-        this.drawNewBadge(passedLevel, this.solvedWithHintBadge);
+    public start(): void {
+        this.helpBtn.addEventListener('click', this.updateWithHintLevelData.bind(this));
+        this.resetBtn.addEventListener('click', this.resetProgress.bind(this));
     }
 
-    public start(): void {
-        this.helpBtn.addEventListener('click', this.listenHelpButtonEvent.bind(this));
-        this.resetBtn.addEventListener('click', this.resetProgress.bind(this));
+    public updateProgress(passedLevel: number): void {
+        switch (this.progressData[passedLevel]) {
+            case LevelStatus.Solved:
+                return;
+            case LevelStatus.NotSolved:
+                this.updateSolvedLevelData(passedLevel);
+                this.drawNewBadge(passedLevel, this.solvedBadge);
+                break;
+            case LevelStatus.SolvedWithHint:
+                this.drawNewBadge(passedLevel, this.solvedWithHintBadge);
+                break;
+            default:
+                break;
+        }
+        this.passedLevels += 1;
+        this.saveProgressData();
+    }
+
+    public getPassedLevels(): number {
+        return this.passedLevels;
     }
 
     private drawNewBadge(levelNumber: number, newBadge: BaseComponent): void {
         const passedLevelSideBarNode = this.levelListInSideBarNode.children[levelNumber];
         const badge = passedLevelSideBarNode.lastElementChild;
-        if (badge && badge.classList.contains(CSSClasses.badge[0])) {
+        if (badge && badge.classList.contains(BADGE_CLASS_CSS)) {
             badge.remove();
             passedLevelSideBarNode.append(newBadge.getCloneNode());
         }
@@ -65,6 +75,7 @@ export class ProgressController implements IObserver {
     }
 
     private saveProgressData(): void {
+        localStorage.setItem(STORAGE_PASSED_LEVELS_KEY, this.passedLevels.toString());
         localStorage.setItem(STORAGE_PROGRESS_KEY, JSON.stringify(this.progressData));
     }
 
@@ -75,6 +86,7 @@ export class ProgressController implements IObserver {
             this.progressData[index] = LevelStatus.NotSolved;
             this.drawNewBadge(index, this.notSolvedBadge);
         });
+        this.passedLevels = 0;
         this.saveProgressData();
     }
 
@@ -89,10 +101,6 @@ export class ProgressController implements IObserver {
         if (this.progressData[currentLevel] === LevelStatus.Solved) return;
         this.progressData[currentLevel] = LevelStatus.SolvedWithHint;
         this.levelData[currentLevel].levelStatus = LevelStatus.SolvedWithHint;
-    }
-
-    private listenHelpButtonEvent(): void {
-        this.updateWithHintLevelData();
         this.saveProgressData();
     }
 }

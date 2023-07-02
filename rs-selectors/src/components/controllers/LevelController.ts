@@ -1,12 +1,16 @@
 import { STORAGE_LEVEL_KEY } from '../../constants';
 import { AppComponents } from '../../data/AppComponents';
 import { levelData } from '../../data/LevelData';
-import { ILevelData, IObserver, ISubject } from '../../types';
+import { ILevelData, IObserver } from '../../types';
+import { ProgressController } from './ProgressController';
 
 const CHANGING_CLASS_CSS = 'changing';
+const LAST_LEVEL_MESSAGE_CLASS_CSS = 'message';
 const SIDE_BAR_CURRENT_CLASSES_CSS = ['current', 'bg-warning'];
+const PASSING_LAST_LVL_MESSAGE = `Great job! You've completed the final level, but there are more levels that you need to complete. Make sure to revisit them.`;
+const PASSING_ALL_LEVELS_MESSAGE = `Hooray, you've passed all the levels! Way to go!`;
 
-export class LevelController implements IObserver, ISubject {
+export class LevelController implements IObserver {
     // counting starts from 0
     private currentLevel: number = Number(localStorage.getItem(STORAGE_LEVEL_KEY)); // if not, then Number(null) === 0
 
@@ -26,18 +30,27 @@ export class LevelController implements IObserver, ISubject {
 
     private levelData: ILevelData[] = levelData;
 
-    private totalLevels: number = this.levelData.length - 1;
+    private totalLevels: number = this.levelData.length;
 
     private currentLevelNodeInSidebar = this.levelListInSideBarNode.children[this.currentLevel];
 
-    private observers: IObserver[] = [];
+    private progressController = new ProgressController();
 
     constructor() {
         this.listenLevelSwitching();
+        this.progressController.start();
     }
 
     public update(): void {
-        this.notify(this.currentLevel);
+        this.progressController.updateProgress(this.currentLevel);
+
+        const isPassedAllLevels = this.progressController.getPassedLevels() === this.totalLevels;
+        const isLastLevel = this.currentLevel === this.totalLevels - 1;
+
+        if (isLastLevel || isPassedAllLevels) {
+            this.handleLastLevelCompletion();
+            return;
+        }
         this.startNextLevel();
     }
 
@@ -51,23 +64,8 @@ export class LevelController implements IObserver, ISubject {
         this.levelBadge.textContent = `Level: ${this.currentLevel + 1}`;
     }
 
-    public subscribe(observer: IObserver): void {
-        this.observers.push(observer);
-    }
-
-    public unsubscribe(observer: IObserver): void {
-        const observerIndex = this.observers.indexOf(observer);
-        if (observerIndex !== -1) {
-            this.observers.splice(observerIndex, 1);
-        }
-    }
-
-    public notify(passedLevel: number): void {
-        this.observers.forEach((observer) => observer.update(passedLevel));
-    }
-
     private startNextLevel(): void {
-        if (this.currentLevel < this.totalLevels) this.currentLevel += 1;
+        if (this.currentLevel < this.totalLevels - 1) this.currentLevel += 1;
         else this.currentLevel = 0;
         this.saveCurrentLevel();
         this.replaceCurrentTableContent();
@@ -103,6 +101,18 @@ export class LevelController implements IObserver, ISubject {
             this.preCodeBlock.innerHTML = '';
             this.drawLevel();
         });
+    }
+
+    private handleLastLevelCompletion(): void {
+        const message = document.createElement('p');
+        message.classList.add(LAST_LEVEL_MESSAGE_CLASS_CSS);
+        message.textContent =
+            this.progressController.getPassedLevels() === this.totalLevels
+                ? PASSING_ALL_LEVELS_MESSAGE
+                : PASSING_LAST_LVL_MESSAGE;
+
+        this.desk.innerHTML = '';
+        this.desk.append(message);
     }
 
     private saveCurrentLevel(): void {
