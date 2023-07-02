@@ -1,4 +1,4 @@
-import { STORAGE_LEVEL_KEY } from '../../constants';
+import { STORAGE_LEVEL_KEY } from '../../data/constants';
 import { AppComponents } from '../../data/AppComponents';
 import { levelData } from '../../data/LevelData';
 import { ILevelData, IObserver } from '../../types';

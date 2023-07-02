@@ -1,4 +1,4 @@
-import { STORAGE_LEVEL_KEY, STORAGE_PASSED_LEVELS_KEY, STORAGE_PROGRESS_KEY } from '../../constants';
+import { STORAGE_LEVEL_KEY, STORAGE_PASSED_LEVELS_KEY, STORAGE_PROGRESS_KEY } from '../../data/constants';
 import { AppComponents } from '../../data/AppComponents';
 import { levelData } from '../../data/LevelData';
 import { ILevelData, LevelStatus, ProgressData } from '../../types';

@@ -1,6 +1,6 @@
 import hljs from 'highlight.js/lib/core';
 import xml from 'highlight.js/lib/languages/xml';
-import { ANIMATED_CLASS, INDENT } from '../../constants';
+import { ANIMATED_CLASS, INDENT } from '../constants';
 import { ILevelData } from '../../types';
 import BaseComponent from '../../utils/BaseComponent';
 import { Level } from './BaseLevel';

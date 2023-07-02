@@ -1,4 +1,4 @@
-import { STORAGE_PROGRESS_KEY } from '../../constants';
+import { STORAGE_PROGRESS_KEY } from '../constants';
 import { ClassesCSS, LevelStatus, ProgressData } from '../../types';
 import BaseComponent from '../../utils/BaseComponent';
 
