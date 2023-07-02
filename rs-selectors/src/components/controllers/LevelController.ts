@@ -28,6 +28,8 @@ export class LevelController implements IObserver {
 
     private resetBtn = AppComponents.levelBarComponent.resetProgressBtn.getNode();
 
+    private answerInput = AppComponents.cssEditorComponent.answerInput.getNode() as HTMLInputElement;
+
     private levelData: ILevelData[] = levelData;
 
     private totalLevels: number = this.levelData.length;
@@ -62,6 +64,7 @@ export class LevelController implements IObserver {
         this.saveCurrentLevel();
         this.highlightCurrentLevelInSideBar(this.currentLevel);
         this.levelBadge.textContent = `Level: ${this.currentLevel + 1}`;
+        this.answerInput.value = '';
     }
 
     private startNextLevel(): void {
