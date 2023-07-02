@@ -1,4 +1,4 @@
-import { ClassesCSS } from '../../../../types';
+import { ClassesCSS } from '../../../../types/types';
 import BaseComponent from '../../../../utils/BaseComponent';
 import { View } from '../../View';
 

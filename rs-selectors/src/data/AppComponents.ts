@@ -1,4 +1,4 @@
-import { Components } from "../types";
+import { Components } from '../types/types';
 
 /**
  * Object to store dynamically generated DOM elements

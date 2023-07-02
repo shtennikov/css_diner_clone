@@ -1,6 +1,6 @@
 import './gameDesk.scss';
 import { View } from '../View';
-import { ClassesCSS } from '../../../types';
+import { ClassesCSS } from '../../../types/types';
 import BaseComponent from '../../../utils/BaseComponent';
 
 const CSSClasses: ClassesCSS = {

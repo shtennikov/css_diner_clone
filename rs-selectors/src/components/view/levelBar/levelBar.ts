@@ -1,5 +1,5 @@
 import './levelBar.scss';
-import { Attributes, ClassesCSS, ILevelData, LevelStatus } from '../../../types';
+import { Attributes, ClassesCSS, ILevelData, LevelStatus } from '../../../types/types';
 import BaseComponent from '../../../utils/BaseComponent';
 import { View } from '../View';
 import { levelData } from '../../../data/LevelData';

@@ -1,7 +1,7 @@
 import { STORAGE_LEVEL_KEY } from '../../data/constants';
 import { AppComponents } from '../../data/AppComponents';
 import { levelData } from '../../data/LevelData';
-import { ILevelData, IObserver } from '../../types';
+import { ILevelData, IObserver } from '../../types/types';
 import { ProgressController } from './ProgressController';
 
 const CHANGING_CLASS_CSS = 'changing';

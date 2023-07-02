@@ -1,5 +1,5 @@
 import './editor.scss';
-import { ClassesCSS } from '../../../types';
+import { ClassesCSS } from '../../../types/types';
 import { CssEditor } from './css-editor/css-editor';
 import { HtmlEditor } from './html-editor/html-editor';
 import BaseComponent from '../../../utils/BaseComponent';

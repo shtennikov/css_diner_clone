@@ -1,7 +1,7 @@
 import { STORAGE_LEVEL_KEY } from '../../data/constants';
 import { AppComponents } from '../../data/AppComponents';
 import { levelData } from '../../data/LevelData';
-import { IObserver, ISubject } from '../../types';
+import { IObserver, ISubject } from '../../types/types';
 import { isSelectorValid } from '../../utils/isSelectorValid';
 
 const SHAKING_CLASS_CSS = 'shaking';

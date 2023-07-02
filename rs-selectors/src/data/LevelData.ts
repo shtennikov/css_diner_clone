@@ -1,4 +1,4 @@
-import { ILevelData } from '../types';
+import { ILevelData } from '../types/types';
 import { firstLevelData } from './levels/Level_1';
 import { tenthLevelData } from './levels/Level_10';
 import { secondLevelData } from './levels/Level_2';

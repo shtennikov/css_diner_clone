@@ -1,5 +1,5 @@
 import { STORAGE_PROGRESS_KEY } from '../constants';
-import { ClassesCSS, LevelStatus, ProgressData } from '../../types';
+import { ClassesCSS, LevelStatus, ProgressData } from '../../types/types';
 import BaseComponent from '../../utils/BaseComponent';
 
 const MOUSEOVER_MARKUP_CSS_CLASS = 'mouseover_markup';
