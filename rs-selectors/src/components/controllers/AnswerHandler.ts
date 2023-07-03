@@ -1,8 +1,13 @@
-import { STORAGE_LEVEL_KEY } from '../../data/constants';
+import hljs from 'highlight.js/lib/core';
+import css from 'highlight.js/lib/languages/css';
+import { DEFAULT_CSS_EDITOR_CONTENT, STORAGE_LEVEL_KEY } from '../../data/constants';
 import { AppComponents } from '../../data/AppComponents';
 import { levelData } from '../../data/LevelData';
 import { IObserver, ISubject } from '../../types/types';
 import { isSelectorValid } from '../../utils/isSelectorValid';
+
+hljs.registerLanguage('css', css);
+const hljsLanguage = { language: 'css' };
 
 const SHAKING_CLASS_CSS = 'shaking';
 const INCORRECT_ANSWER_CLASS_CSS = 'incorrect';
@@ -10,6 +15,8 @@ const DELAY_INTERVAL = 150;
 
 export class AnswerHandler implements ISubject {
     private input = AppComponents.cssEditorComponent.answerInput.getNode() as HTMLInputElement;
+
+    private output = AppComponents.cssEditorComponent.answerOutput.getNode();
 
     private submitBtn = AppComponents.cssEditorComponent.buttonEnter.getNode();
 
@@ -23,6 +30,7 @@ export class AnswerHandler implements ISubject {
         document.addEventListener('keyup', this.listenInputEvent.bind(this));
         this.submitBtn.addEventListener('click', this.listenButtonEvent.bind(this));
         this.helpBtn.addEventListener('click', this.listenHelpButtonEvent.bind(this));
+        this.input.addEventListener('input', this.updateOutput.bind(this));
     }
 
     public subscribe(observer: IObserver): void {
@@ -80,9 +88,16 @@ export class AnswerHandler implements ISubject {
         [...correctAnswer].forEach((letter) => {
             setTimeout(() => {
                 this.input.value += letter;
+                this.updateOutput();
             }, delay);
             delay += DELAY_INTERVAL;
         });
+    }
+
+    private updateOutput(): void {
+        this.output.innerHTML = `${
+            hljs.highlight(`${this.input.value} ${DEFAULT_CSS_EDITOR_CONTENT}`, hljsLanguage).value
+        }`;
     }
 
     private listenInputEvent(event: KeyboardEvent): void {

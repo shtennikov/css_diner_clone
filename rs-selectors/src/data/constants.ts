@@ -7,3 +7,5 @@ export const STORAGE_PASSED_LEVELS_KEY = 'passed';
 
 export const SMALL_CLASS = 'small';
 export const ANIMATED_CLASS = 'animated';
+
+export const DEFAULT_CSS_EDITOR_CONTENT = `{ \n${INDENT}animation: move 0.7s infinite; \n}`;
