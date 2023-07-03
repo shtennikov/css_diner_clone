@@ -1,3 +1,4 @@
+import './css-editor.scss';
 import hljs from 'highlight.js/lib/core';
 import css from 'highlight.js/lib/languages/css';
 import { Attributes, ClassesCSS } from '../../../../types/types';
@@ -53,7 +54,7 @@ export class CssEditor extends View {
 
         this.answerInput.setAttributes(cssEditorAttributes.answerInput);
         this.buttonEnter.setTextContent(BUTTON_TEXT);
-        console.log(hljs.highlight(`${this.answerOutput.getNode().textContent}`, hljsLanguage).value)
+        console.log(hljs.highlight(`${this.answerOutput.getNode().textContent}`, hljsLanguage).value);
         this.answerOutput.insertHTML(hljs.highlight(`${DEFAULT_CSS_EDITOR_CONTENT}`, hljsLanguage).value);
         this.fillRowsWithNumbers();
 

@@ -1,3 +1,4 @@
+import './html-editor.scss';
 import { ClassesCSS } from '../../../../types/types';
 import BaseComponent from '../../../../utils/BaseComponent';
 import { View } from '../../View';
