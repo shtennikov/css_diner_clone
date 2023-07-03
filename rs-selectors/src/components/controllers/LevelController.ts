@@ -69,7 +69,7 @@ export class LevelController implements IObserver {
 
     private startNextLevel(): void {
         if (this.currentLevel < this.totalLevels - 1) this.currentLevel += 1;
-        else this.currentLevel = 0;
+        else return;
         this.saveCurrentLevel();
         this.replaceCurrentTableContent();
     }
