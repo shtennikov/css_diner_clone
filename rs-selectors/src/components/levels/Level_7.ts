@@ -1,6 +1,6 @@
 import hljs from 'highlight.js/lib/core';
 import xml from 'highlight.js/lib/languages/xml';
-import { ANIMATED_CLASS } from '../constants';
+import { ANIMATED_CLASS, INDENT } from '../../data/constants';
 import { ILevelData } from '../../types/types';
 import BaseComponent from '../../utils/BaseComponent';
 import { Level } from './BaseLevel';
@@ -8,20 +8,20 @@ import { Level } from './BaseLevel';
 hljs.registerLanguage('xml', xml);
 const hljsLanguage = { language: 'xml' };
 
-const CORRECT_ANSWER = 'apple:not(:last-child)';
+const CORRECT_ANSWER = 'placemat:empty';
 
-class LevelEight extends Level {
-    private itemOnDesk_1 = new BaseComponent('apple', [ANIMATED_CLASS]);
+class LevelSeven extends Level {
+    private itemOnDesk_1 = new BaseComponent('placemat', [ANIMATED_CLASS]);
 
-    private itemOnDesk_2 = new BaseComponent('apple', [ANIMATED_CLASS]);
+    private itemOnDesk_2 = new BaseComponent('placemat');
 
-    private itemOnDesk_3 = new BaseComponent('apple', [ANIMATED_CLASS]);
+    private itemOnDesk_3 = new BaseComponent('apple', null, this.itemOnDesk_2);
 
-    private itemOnDesk_4 = new BaseComponent('apple');
+    private itemOnDesk_4 = new BaseComponent('placemat', [ANIMATED_CLASS]);
 
     constructor() {
         super();
-        this.levelNumber = 8;
+        this.levelNumber = 7;
         this.setStatus();
         this.createHTMLMarkup();
         this.createLevelNodesForDesk();
@@ -31,7 +31,6 @@ class LevelEight extends Level {
         this.levelNodes.push(
             this.itemOnDesk_1.getNode(), // includes itemOnDesk_3
             this.itemOnDesk_2.getNode(),
-            this.itemOnDesk_3.getNode(),
             this.itemOnDesk_4.getNode()
         );
     }
@@ -39,13 +38,17 @@ class LevelEight extends Level {
     private createHTMLMarkup(): void {
         const item1Markup = new BaseComponent('span', null, this.htmlMarkup);
         const item2Markup = new BaseComponent('span', null, this.htmlMarkup);
-        const item3Markup = new BaseComponent('span', null, this.htmlMarkup);
+        const item3Markup = new BaseComponent('span');
         const item4Markup = new BaseComponent('span', null, this.htmlMarkup);
 
-        item1Markup.insertHTML(hljs.highlight(`<apple />`, hljsLanguage).value);
-        item2Markup.insertHTML(hljs.highlight(`\n<apple />`, hljsLanguage).value);
-        item3Markup.insertHTML(hljs.highlight(`\n<apple />`, hljsLanguage).value);
-        item4Markup.insertHTML(hljs.highlight(`\n<apple />`, hljsLanguage).value);
+        item1Markup.insertHTML(hljs.highlight(`<placemat />`, hljsLanguage).value);
+
+        item2Markup.insertHTML(hljs.highlight(`\n<placemat>`, hljsLanguage).value);
+        item3Markup.insertHTML(hljs.highlight(`\n${INDENT}<apple />`, hljsLanguage).value);
+        item2Markup.append(item3Markup);
+        item2Markup.insertHTML(hljs.highlight(`\n</placemat>`, hljsLanguage).value);
+
+        item4Markup.insertHTML(hljs.highlight(`\n<placemat />`, hljsLanguage).value);
 
         this.setMutualObservation(
             [this.itemOnDesk_1, item1Markup],
@@ -56,12 +59,12 @@ class LevelEight extends Level {
     }
 }
 
-const eighthLevel = new LevelEight();
+const seventhLevel = new LevelSeven();
 
-export const eighthLevelData: ILevelData = {
-    id: eighthLevel.getLevelNumber(),
-    levelStatus: eighthLevel.getStatus(),
+export const seventhLevelData: ILevelData = {
+    id: seventhLevel.getLevelNumber(),
+    levelStatus: seventhLevel.getStatus(),
     correctAnswer: CORRECT_ANSWER,
-    levelComponentsOnDesk: eighthLevel.getNodes(),
-    levelMarkup: eighthLevel.getMarkup(),
+    levelComponentsOnDesk: seventhLevel.getNodes(),
+    levelMarkup: seventhLevel.getMarkup(),
 };

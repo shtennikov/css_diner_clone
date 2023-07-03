@@ -3,7 +3,7 @@ import xml from 'highlight.js/lib/languages/xml';
 import { ILevelData } from '../../types/types';
 import BaseComponent from '../../utils/BaseComponent';
 import { Level } from './BaseLevel';
-import { ANIMATED_CLASS } from '../constants';
+import { ANIMATED_CLASS } from '../../data/constants';
 
 hljs.registerLanguage('xml', xml);
 const hljsLanguage = { language: 'xml' };

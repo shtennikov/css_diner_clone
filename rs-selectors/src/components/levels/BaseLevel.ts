@@ -1,6 +1,6 @@
 import hljs from 'highlight.js/lib/core';
 import xml from 'highlight.js/lib/languages/xml';
-import { STORAGE_PROGRESS_KEY } from '../constants';
+import { STORAGE_PROGRESS_KEY } from '../../data/constants';
 import { ClassesCSS, LevelStatus, ProgressData } from '../../types/types';
 import BaseComponent from '../../utils/BaseComponent';
 
