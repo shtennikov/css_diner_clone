@@ -23,6 +23,7 @@ const config = {
   plugins: [
     new HtmlWebpackPlugin({
       template: path.join(__dirname, 'src', 'index.html'),
+      favicon: path.join(__dirname, 'public', 'css-icon.png'),
     }),
   ],
   module: {
