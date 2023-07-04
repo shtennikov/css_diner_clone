@@ -2,7 +2,6 @@
     display: flex;
     background: #454545;
     width: 50%;
-    max-width: 50%;
     & .editor__rows {
         border-right: 1px solid rgb(56, 56, 56);
         background: #454545;
@@ -52,5 +51,8 @@
             height: auto;
             font-family: 'JetBrains Mono', 'Courier New', monospace;
         }
+    }
+    @media (max-width: 768px) {
+        width: 100%;
     }
 }

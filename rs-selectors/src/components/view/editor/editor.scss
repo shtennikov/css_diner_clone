@@ -16,4 +16,9 @@
         padding: 4px 8px;
         background: rgb(110, 110, 110);
     }
+
+    @media (max-width: 768px) {
+        flex-direction: column-reverse;
+        align-items: center;
+    }
 }
