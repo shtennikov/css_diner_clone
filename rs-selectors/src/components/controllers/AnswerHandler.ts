@@ -4,7 +4,6 @@ import { DEFAULT_CSS_EDITOR_CONTENT, STORAGE_LEVEL_KEY } from '../../data/consta
 import { AppComponents } from '../../data/AppComponents';
 import { levelData } from '../../data/LevelData';
 import { IObserver, ISubject } from '../../types/types';
-import { isSelectorValid } from '../../utils/isSelectorValid';
 
 hljs.registerLanguage('css', css);
 const hljsLanguage = { language: 'css' };
@@ -71,12 +70,14 @@ export class AnswerHandler implements ISubject {
     }
 
     private checkIfAnswerIsCorrect(inputValue: string): boolean {
-        if (!isSelectorValid(this.input.value)) return false;
+        try {
+            const foundItems = this.desk.querySelectorAll(inputValue);
+            const isFoundItemsAnimated = [...foundItems].every((item) => item.classList.contains('animated'));
 
-        const foundItems = this.desk.querySelectorAll(inputValue);
-        const isFoundItemsAnimated = [...foundItems].every((item) => item.classList.contains('animated'));
-
-        return Boolean(foundItems.length && isFoundItemsAnimated);
+            return Boolean(foundItems.length && isFoundItemsAnimated);
+        } catch {
+            return false;
+        }
     }
 
     private showCorrectAnswer(): void {
