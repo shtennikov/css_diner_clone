@@ -1,5 +1,5 @@
 import { Controller } from './controllers/Controller';
-import { AppView } from './view/AppView';
+import { AppView } from './view/appView';
 
 export class App {
     private view = new AppView();
