@@ -1,3 +1,5 @@
+import { LanguageHljs } from "../types/types";
+
 export const INDENT = '    ';
 export const LESS_THAN = '&lt;';
 export const GREATER_THAN = '&gt;';
@@ -11,3 +13,6 @@ export const SMALL_CLASS = 'small';
 export const ANIMATED_CLASS = 'animated';
 
 export const DEFAULT_CSS_EDITOR_CONTENT = `{ \n${INDENT}animation: move 0.7s infinite; \n}`;
+
+export const XML_LANGUAGE_HLJS: LanguageHljs = { language: 'xml' };
+export const CSS_LANGUAGE_HLJS: LanguageHljs = { language: 'css' };

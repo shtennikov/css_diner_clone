@@ -1,12 +1,11 @@
 import hljs from 'highlight.js/lib/core';
 import xml from 'highlight.js/lib/languages/xml';
-import { ANIMATED_CLASS, INDENT, SMALL_CLASS } from '../../data/constants';
+import { ANIMATED_CLASS, INDENT, SMALL_CLASS, XML_LANGUAGE_HLJS } from '../../data/constants';
 import { ILevelData } from '../../types/types';
 import BaseComponent from '../../utils/BaseComponent';
 import { Level } from './BaseLevel';
 
 hljs.registerLanguage('xml', xml);
-const hljsLanguage = { language: 'xml' };
 
 const CORRECT_ANSWER = '.small';
 
@@ -44,15 +43,15 @@ class LevelTwo extends Level {
         const fourthItemMarkup = new BaseComponent('span');
         const fifthItemMarkup = new BaseComponent('span', null, this.htmlMarkup);
 
-        firstItemMarkup.insertHTML(hljs.highlight(`<orange />`, hljsLanguage).value);
-        secondItemMarkup.insertHTML(hljs.highlight(`\n<plate>`, hljsLanguage).value);
-        thirdItemMarkup.insertHTML(hljs.highlight(`\n${INDENT}<apple class="small" />`, hljsLanguage).value);
-        fourthItemMarkup.insertHTML(hljs.highlight(`\n${INDENT}<apple />`, hljsLanguage).value);
+        firstItemMarkup.insertHTML(hljs.highlight(`<orange />`, XML_LANGUAGE_HLJS).value);
+        secondItemMarkup.insertHTML(hljs.highlight(`\n<plate>`, XML_LANGUAGE_HLJS).value);
+        thirdItemMarkup.insertHTML(hljs.highlight(`\n${INDENT}<apple class="small" />`, XML_LANGUAGE_HLJS).value);
+        fourthItemMarkup.insertHTML(hljs.highlight(`\n${INDENT}<apple />`, XML_LANGUAGE_HLJS).value);
 
         secondItemMarkup.appendChildren([thirdItemMarkup, fourthItemMarkup]);
 
-        secondItemMarkup.insertHTML(hljs.highlight(`\n</plate>`, hljsLanguage).value);
-        fifthItemMarkup.insertHTML(`\n${hljs.highlight(`<apple class="small" />`, hljsLanguage).value}`);
+        secondItemMarkup.insertHTML(hljs.highlight(`\n</plate>`, XML_LANGUAGE_HLJS).value);
+        fifthItemMarkup.insertHTML(`\n${hljs.highlight(`<apple class="small" />`, XML_LANGUAGE_HLJS).value}`);
 
         this.setMutualObservation(
             [this.firstItemOnDesk, firstItemMarkup],

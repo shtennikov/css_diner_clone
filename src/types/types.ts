@@ -26,6 +26,10 @@ export interface ProgressData {
     [key: string]: LevelStatus;
 }
 
+export interface LanguageHljs {
+    language: string;
+}
+
 export type Attributes = Record<string, Record<string, string>>;
 
 export type Components = Record<string, BaseComponent>;

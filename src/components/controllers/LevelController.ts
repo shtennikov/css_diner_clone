@@ -1,13 +1,12 @@
 import hljs from 'highlight.js/lib/core';
 import css from 'highlight.js/lib/languages/css';
-import { DEFAULT_CSS_EDITOR_CONTENT, STORAGE_LEVEL_KEY } from '../../data/constants';
+import { CSS_LANGUAGE_HLJS, DEFAULT_CSS_EDITOR_CONTENT, STORAGE_LEVEL_KEY } from '../../data/constants';
 import { AppComponents } from '../../data/AppComponents';
 import { levelData } from '../../data/LevelData';
 import { ILevelData, IObserver } from '../../types/types';
 import { ProgressController } from './ProgressController';
 
 hljs.registerLanguage('css', css);
-const hljsLanguage = { language: 'css' };
 
 const CHANGING_CLASS_CSS = 'changing';
 const LAST_LEVEL_MESSAGE_CLASS_CSS = 'message';
@@ -72,7 +71,7 @@ export class LevelController implements IObserver {
         this.highlightCurrentLevelInSideBar(this.currentLevel);
         this.levelBadge.textContent = `Level: ${this.currentLevel + 1}`;
         this.answerInput.value = '';
-        this.answerOutput.innerHTML = `${hljs.highlight(`${DEFAULT_CSS_EDITOR_CONTENT}`, hljsLanguage).value}`;
+        this.answerOutput.innerHTML = `${hljs.highlight(`${DEFAULT_CSS_EDITOR_CONTENT}`, CSS_LANGUAGE_HLJS).value}`;
     }
 
     private startNextLevel(): void {

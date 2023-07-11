@@ -1,12 +1,11 @@
 import hljs from 'highlight.js/lib/core';
 import xml from 'highlight.js/lib/languages/xml';
-import { ANIMATED_CLASS, SMALL_CLASS } from '../../data/constants';
+import { ANIMATED_CLASS, SMALL_CLASS, XML_LANGUAGE_HLJS } from '../../data/constants';
 import { ILevelData } from '../../types/types';
 import BaseComponent from '../../utils/BaseComponent';
 import { Level } from './BaseLevel';
 
 hljs.registerLanguage('xml', xml);
-const hljsLanguage = { language: 'xml' };
 
 const CORRECT_ANSWER = 'apple:nth-of-type(2n+2)';
 
@@ -46,11 +45,11 @@ class LevelNine extends Level {
         const item4Markup = new BaseComponent('span', null, this.htmlMarkup);
         const item5Markup = new BaseComponent('span', null, this.htmlMarkup);
 
-        item1Markup.insertHTML(hljs.highlight(`<apple class="small" />`, hljsLanguage).value);
-        item2Markup.insertHTML(hljs.highlight(`\n<orange />`, hljsLanguage).value);
-        item3Markup.insertHTML(hljs.highlight(`\n<apple />`, hljsLanguage).value);
-        item4Markup.insertHTML(hljs.highlight(`\n<apple />`, hljsLanguage).value);
-        item5Markup.insertHTML(hljs.highlight(`\n<apple class="small" />`, hljsLanguage).value);
+        item1Markup.insertHTML(hljs.highlight(`<apple class="small" />`, XML_LANGUAGE_HLJS).value);
+        item2Markup.insertHTML(hljs.highlight(`\n<orange />`, XML_LANGUAGE_HLJS).value);
+        item3Markup.insertHTML(hljs.highlight(`\n<apple />`, XML_LANGUAGE_HLJS).value);
+        item4Markup.insertHTML(hljs.highlight(`\n<apple />`, XML_LANGUAGE_HLJS).value);
+        item5Markup.insertHTML(hljs.highlight(`\n<apple class="small" />`, XML_LANGUAGE_HLJS).value);
 
         this.setMutualObservation(
             [this.itemOnDesk_1, item1Markup],

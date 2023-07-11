@@ -3,10 +3,9 @@ import xml from 'highlight.js/lib/languages/xml';
 import { ILevelData } from '../../types/types';
 import BaseComponent from '../../utils/BaseComponent';
 import { Level } from './BaseLevel';
-import { ANIMATED_CLASS } from '../../data/constants';
+import { ANIMATED_CLASS, XML_LANGUAGE_HLJS } from '../../data/constants';
 
 hljs.registerLanguage('xml', xml);
-const hljsLanguage = { language: 'xml' };
 
 const CORRECT_ANSWER = 'plate';
 
@@ -38,9 +37,9 @@ class LevelOne extends Level {
         const secondItemMarkup = new BaseComponent('span', null, this.htmlMarkup);
         const thirdItemMarkup = new BaseComponent('span', null, this.htmlMarkup);
 
-        firstItemMarkup.insertHTML(hljs.highlight(`<apple />`, hljsLanguage).value);
-        secondItemMarkup.insertHTML(hljs.highlight(`\n<plate />`, hljsLanguage).value);
-        thirdItemMarkup.insertHTML(hljs.highlight(`\n<apple />`, hljsLanguage).value);
+        firstItemMarkup.insertHTML(hljs.highlight(`<apple />`, XML_LANGUAGE_HLJS).value);
+        secondItemMarkup.insertHTML(hljs.highlight(`\n<plate />`, XML_LANGUAGE_HLJS).value);
+        thirdItemMarkup.insertHTML(hljs.highlight(`\n<apple />`, XML_LANGUAGE_HLJS).value);
 
         this.setMutualObservation(
             [this.firstItemOnDesk, firstItemMarkup],

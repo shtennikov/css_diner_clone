@@ -1,12 +1,11 @@
 import hljs from 'highlight.js/lib/core';
 import xml from 'highlight.js/lib/languages/xml';
-import { ANIMATED_CLASS } from '../../data/constants';
+import { ANIMATED_CLASS, XML_LANGUAGE_HLJS } from '../../data/constants';
 import { ILevelData } from '../../types/types';
 import BaseComponent from '../../utils/BaseComponent';
 import { Level } from './BaseLevel';
 
 hljs.registerLanguage('xml', xml);
-const hljsLanguage = { language: 'xml' };
 
 const CORRECT_ANSWER = 'apple:not(:last-child)';
 
@@ -42,10 +41,10 @@ class LevelEight extends Level {
         const item3Markup = new BaseComponent('span', null, this.htmlMarkup);
         const item4Markup = new BaseComponent('span', null, this.htmlMarkup);
 
-        item1Markup.insertHTML(hljs.highlight(`<apple />`, hljsLanguage).value);
-        item2Markup.insertHTML(hljs.highlight(`\n<apple />`, hljsLanguage).value);
-        item3Markup.insertHTML(hljs.highlight(`\n<apple />`, hljsLanguage).value);
-        item4Markup.insertHTML(hljs.highlight(`\n<apple />`, hljsLanguage).value);
+        item1Markup.insertHTML(hljs.highlight(`<apple />`, XML_LANGUAGE_HLJS).value);
+        item2Markup.insertHTML(hljs.highlight(`\n<apple />`, XML_LANGUAGE_HLJS).value);
+        item3Markup.insertHTML(hljs.highlight(`\n<apple />`, XML_LANGUAGE_HLJS).value);
+        item4Markup.insertHTML(hljs.highlight(`\n<apple />`, XML_LANGUAGE_HLJS).value);
 
         this.setMutualObservation(
             [this.itemOnDesk_1, item1Markup],

@@ -3,10 +3,9 @@ import xml from 'highlight.js/lib/languages/xml';
 import { ILevelData } from '../../types/types';
 import BaseComponent from '../../utils/BaseComponent';
 import { Level } from './BaseLevel';
-import { ANIMATED_CLASS } from '../../data/constants';
+import { ANIMATED_CLASS, XML_LANGUAGE_HLJS } from '../../data/constants';
 
 hljs.registerLanguage('xml', xml);
-const hljsLanguage = { language: 'xml' };
 
 const ID_TARGET_ELEMENT = 'rim';
 const CORRECT_ANSWER = '#rim';
@@ -46,10 +45,10 @@ class LevelThree extends Level {
         const thirdItemMarkup = new BaseComponent('span', null, this.htmlMarkup);
         const fourthItemMarkup = new BaseComponent('span', null, this.htmlMarkup);
 
-        firstItemMarkup.insertHTML(hljs.highlight(`<plate />`, hljsLanguage).value);
-        secondItemMarkup.insertHTML(hljs.highlight(`\n<plate id ="rim" />`, hljsLanguage).value);
-        thirdItemMarkup.insertHTML(hljs.highlight(`\n<plate />`, hljsLanguage).value);
-        fourthItemMarkup.insertHTML(hljs.highlight(`\n<plate id ="rim" />`, hljsLanguage).value);
+        firstItemMarkup.insertHTML(hljs.highlight(`<plate />`, XML_LANGUAGE_HLJS).value);
+        secondItemMarkup.insertHTML(hljs.highlight(`\n<plate id ="rim" />`, XML_LANGUAGE_HLJS).value);
+        thirdItemMarkup.insertHTML(hljs.highlight(`\n<plate />`, XML_LANGUAGE_HLJS).value);
+        fourthItemMarkup.insertHTML(hljs.highlight(`\n<plate id ="rim" />`, XML_LANGUAGE_HLJS).value);
 
         this.setMutualObservation(
             [this.firstItemOnDesk, firstItemMarkup],

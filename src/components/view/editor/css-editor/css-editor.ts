@@ -4,10 +4,9 @@ import css from 'highlight.js/lib/languages/css';
 import { Attributes, ClassesCSS } from '../../../../types/types';
 import BaseComponent from '../../../../utils/BaseComponent';
 import { View } from '../../View';
-import { DEFAULT_CSS_EDITOR_CONTENT } from '../../../../data/constants';
+import { CSS_LANGUAGE_HLJS, DEFAULT_CSS_EDITOR_CONTENT } from '../../../../data/constants';
 
 hljs.registerLanguage('css', css);
-const hljsLanguage = { language: 'css' };
 
 const ROWS_COUNT = 10;
 const INPUT_PLACEHODLER = 'Type a selector';
@@ -54,7 +53,7 @@ export class CssEditor extends View {
 
         this.answerInput.setAttributes(cssEditorAttributes.answerInput);
         this.buttonEnter.setTextContent(BUTTON_TEXT);
-        this.answerOutput.insertHTML(hljs.highlight(`${DEFAULT_CSS_EDITOR_CONTENT}`, hljsLanguage).value);
+        this.answerOutput.insertHTML(hljs.highlight(`${DEFAULT_CSS_EDITOR_CONTENT}`, CSS_LANGUAGE_HLJS).value);
         this.fillRowsWithNumbers();
 
         this.rememberElements('cssEditorComponent', {

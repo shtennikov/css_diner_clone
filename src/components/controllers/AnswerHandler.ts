@@ -1,12 +1,11 @@
 import hljs from 'highlight.js/lib/core';
 import css from 'highlight.js/lib/languages/css';
-import { DEFAULT_CSS_EDITOR_CONTENT, STORAGE_LEVEL_KEY } from '../../data/constants';
+import { CSS_LANGUAGE_HLJS, DEFAULT_CSS_EDITOR_CONTENT, STORAGE_LEVEL_KEY } from '../../data/constants';
 import { AppComponents } from '../../data/AppComponents';
 import { levelData } from '../../data/LevelData';
 import { IObserver, ISubject } from '../../types/types';
 
 hljs.registerLanguage('css', css);
-const hljsLanguage = { language: 'css' };
 
 const SHAKING_CLASS_CSS = 'shaking';
 const INCORRECT_ANSWER_CLASS_CSS = 'incorrect';
@@ -97,7 +96,7 @@ export class AnswerHandler implements ISubject {
 
     private updateOutput(): void {
         this.output.innerHTML = `${
-            hljs.highlight(`${this.input.value} ${DEFAULT_CSS_EDITOR_CONTENT}`, hljsLanguage).value
+            hljs.highlight(`${this.input.value} ${DEFAULT_CSS_EDITOR_CONTENT}`, CSS_LANGUAGE_HLJS).value
         }`;
     }
 

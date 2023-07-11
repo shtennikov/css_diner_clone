@@ -1,11 +1,10 @@
 import hljs from 'highlight.js/lib/core';
 import xml from 'highlight.js/lib/languages/xml';
-import { STORAGE_PROGRESS_KEY } from '../../data/constants';
+import { STORAGE_PROGRESS_KEY, XML_LANGUAGE_HLJS } from '../../data/constants';
 import { ClassesCSS, LevelStatus, ProgressData } from '../../types/types';
 import BaseComponent from '../../utils/BaseComponent';
 
 hljs.registerLanguage('xml', xml);
-const hljsLanguage = { language: 'xml' };
 
 const MOUSEOVER_MARKUP_CSS_CLASS = 'mouseover_markup';
 const MOUSEOVER_DESK_CSS_CLASS = 'mouseover_desk';
@@ -67,7 +66,7 @@ export abstract class Level {
         const y = rect.top;
         const tagCurrentElement = htmlMarkup.getNode().children[0].textContent?.trim();
 
-        this.tooltip.insertHTML(hljs.highlight(`${tagCurrentElement}`, hljsLanguage).value);
+        this.tooltip.insertHTML(hljs.highlight(`${tagCurrentElement}`, XML_LANGUAGE_HLJS).value);
 
         document.body.append(this.tooltip.getNode());
         this.tooltip.getNode().style.left = `${x}px`;
