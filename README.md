@@ -14,7 +14,7 @@ This project is a recreation of the CSS Diner application. It is developed using
  - Jest tests implemented to ensure the reliability of certain methods.
  - Codebase is entirely written using classes for structured and organized code.
  - Application is divided into modules for improved code organization and reusability.
- 
+
 ### Skills Acquired:
 
  - Proficiency in TypeScript for building robust and scalable web applications.
@@ -26,3 +26,21 @@ This project is a recreation of the CSS Diner application. It is developed using
  - Utilization of class-based programming for structured and maintainable code.
  - Code modularization for improved organization and code reuse.
  - Version control using Git and hosting projects on GitHub.
+
+### Installation and Setup
+ 1. Clone the repository to your local machine:
+  ```bash
+  git clone git@github.com:shtennikov/css_diner_clone.git
+  ```
+ 2. Navigate to the project directory:
+  ```bash
+  cd css_diner_clone
+  ```
+ 3. Install the dependencies:
+  ```bash
+  npm install
+  ```
+ 4. Start the project:
+   ```bash
+  npm run serve
+  ```
