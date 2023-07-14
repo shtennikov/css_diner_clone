@@ -2,6 +2,8 @@
 
 This project is a recreation of the CSS Diner application. It is developed using TypeScript, with SCSS used for styling. The build process is handled by Webpack, and ESLint is set up to work seamlessly with TypeScript. All elements are dynamically generated, and the Observer pattern is implemented to update specific parts of the application. Some methods are also accompanied by Jest tests. The code is entirely written using classes, and the application is divided into modules for better organization and reusability.
 
+Deployed project: https://shtennikov.github.io/css_diner_clone/
+
 ### Implemented Features:
 
  - Replicates the functionality of the CSS Diner application.
